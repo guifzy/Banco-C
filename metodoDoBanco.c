@@ -1,56 +1,38 @@
 #include <stdio.h>
 
-int main ()
+int main()
 {
-    int lista [9] = {4, 5, 8, 2, 9, 1, 3, 7, 6};
-    int tamanho = sizeof(lista) / sizeof(lista[0]);
-    int i, j, temp;
     int comps = 0; 
     int trocas = 0;
+    int arr[] = {1, 4, 2, 5, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int i, temp, j;
 
-    printf("\nLista desordenada: ");
-    for ( i = 0; i < tamanho; i++)
+    printf("\nArray desordenado: ");
+    for ( i = 0; i < n; i++)
     {
-        printf("%d ", lista[i]);
+        printf("%d ", arr[i]);
     }
-
-    for (i = 0; i < (tamanho - 1); i++)
-    {
+    
+    for (i = 1; i < n; i++) {
+        temp = arr[i];
+        j = i - 1;
         comps ++;
-        if (lista[i] > lista[i + 1])
-        {
-            temp = lista[i + 1];
-            lista[i + 1] = lista[i];
-            lista[i] = temp; 
 
-            j = i -1;
+        while (j >= 0 && arr[j] > temp) {     
+            arr[j + 1] = arr[j];            
+            j = j - 1;
             trocas ++;
-        }
-        while (j >= 0)
-        {
             comps ++;
-            if (temp < lista[j])
-            {
-                lista[j + 1] = lista [j];
-                lista[j] = temp;
-
-                trocas ++;
-            } else
-            {
-                break;
-            }
-            j--;
         }
-        
+        arr[j + 1] = temp;
     }
 
-    printf("\nLista ordenada: ");
-    for ( i = 0; i < tamanho; i++)
-    {
-        printf("%d ", lista[i]);
+    printf("\nArray ordenado: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
     }
-
-    printf("\nNumero de trocas: %d \nNumero de comparacoes: %d", trocas, comps);
+    printf("\nNumero de comparacoes: %d \nNumero de trocas: %d", comps, trocas );
 
     return 0;
 }
