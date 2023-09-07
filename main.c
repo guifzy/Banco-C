@@ -50,13 +50,85 @@ void visualizarContas(banco contas[], int numContas) {
     }
 }
 
-void selectionSort()
+void selectionSort(int numContas, FILE *arquivo)
 {
+    banco contas[numContas];   
+    banco temp;
+    int comps = 0; 
+    int trocas = 0;
+    int  min, i, j;
+
+    fread(contas, sizeof(banco), numContas, arquivo);
+
+    for (i = 0; i < numContas; i++)
+    {
+        min = i;
+        for (j = i + 1; j < numContas; j++)
+        {
+            comps++;
+            if (contas[j].saldo < contas[min].saldo)
+            {
+                min = j;
+            }
+        }
+        if (min != i)
+        {
+            temp = contas[i];
+            contas[i] = contas[min];
+            contas[min] = temp;
+            trocas++;
+        }
+    }
+    
+    printf("\nContas ordenadas por saldo:\n");
+    for (int i = 0; i < numContas; i++) {
+        printf("Conta %d:\n", i + 1);
+        printf("Nome do Titular: %s", contas[i].nome);
+        printf("Numero da Conta: %d\n", contas[i].num);
+        printf("Saldo: %.2f\n", contas[i].saldo);
+        printf("\n----------------------------\n");
+    }
+    printf("\nNumero de comparacoes: %d", comps);
+    printf("\nNumero de trocas: %d", trocas);
+    printf("\n----------------------------\n");
 
 }
 
-void insertionSort()
+void insertionSort(int numContas, FILE *arquivo)
 {
+    banco contas[numContas];   
+    banco temp;
+    int comps = 0; 
+    int trocas = 0;
+    int  min, i, j;
+
+    fread(contas, sizeof(banco), numContas, arquivo);
+
+    for (i = 1; i < numContas; i++) {
+        temp = contas[i];
+        j = i - 1;
+        comps ++;
+
+        while (j >= 0 && contas[j].saldo > temp.saldo) {     
+            contas[j + 1] = contas[j];            
+            j = j - 1;
+            trocas ++;
+            comps ++;
+        }
+        contas[j + 1] = temp;
+    }
+
+    printf("\nContas ordenadas por saldo:\n");
+    for (int i = 0; i < numContas; i++) {
+        printf("Conta %d:\n", i + 1);
+        printf("Nome do Titular: %s", contas[i].nome);
+        printf("Numero da Conta: %d\n", contas[i].num);
+        printf("Saldo: %.2f\n", contas[i].saldo);
+        printf("\n----------------------------\n");
+    }
+    printf("\nNumero de comparacoes: %d", comps);
+    printf("\nNumero de trocas: %d", trocas);
+    printf("\n----------------------------\n");
 
 }
 
@@ -65,6 +137,7 @@ int main() {
     int numContas = 0;
     int opcao;
     FILE *dadosBanco;
+    FILE *abrirArqv;
     dadosBanco = fopen("DadosBancarios.txt", "w");
     if (dadosBanco == NULL)
     {
@@ -88,8 +161,8 @@ int main() {
         printf("\n|------------------------------------|");
         printf("\n|  1- Cadastrar nova conta           |");
         printf("\n|  2- Visualizar contas              |");
-        printf("\n|  3- Ordenar por saldo (Insercao)   |");
-        printf("\n|  4- Ordenar por saldo (Selecao)    |");
+        printf("\n|  3- Ordenar por saldo (selecao)    |");
+        printf("\n|  4- Ordenar por saldo (Insercao)   |");
         printf("\n|  5- Sair do programa               |");
         printf("\n|------------------------------------|\n");
         printf("\nInsira o numero correspondente a uma das opcoes acima: ");
@@ -109,18 +182,34 @@ int main() {
             case 2:
                 if (numContas <= 0) {
                     printf("\n  Nenhuma conta registrada.\n");
-                } else {
+                } else 
+                {
                     visualizarContas(contas, numContas);
                 }
                 break;
 
             case 3:
-                fclose(dadosBanco);
-
+                if (numContas <= 0) {
+                    printf("\n  Nenhuma conta registrada.\n");
+                } else
+                {
+                    fclose(dadosBanco);
+                    abrirArqv = fopen("DadosBancarios.txt", "r");
+                    selectionSort(numContas, abrirArqv);
+                    fclose(abrirArqv);
+                }
                 break;
 
             case 4:
-                fclose(dadosBanco);
+                if (numContas <= 0) {
+                    printf("\n  Nenhuma conta registrada.\n");
+                } else
+                {
+                    fclose(dadosBanco);
+                    abrirArqv = fopen("DadosBancarios.txt", "r");
+                    insertionSort(numContas, abrirArqv);
+                    fclose(abrirArqv);
+                }
 
                 break;
 
