@@ -48,6 +48,7 @@ void visualizarContas(banco contas[], int numContas) {
         printf("Saldo: %.2f\n", contas[i].saldo);
         printf("------------------------\n");
     }
+    system("pause");
 }
 
 void selectionSort(int numContas, FILE *arquivo)
@@ -91,6 +92,7 @@ void selectionSort(int numContas, FILE *arquivo)
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
     printf("\n----------------------------\n");
+    system("pause");
 
 }
 
@@ -116,6 +118,7 @@ void insertionSort(int numContas, FILE *arquivo)
             comps ++;
         }
         contas[j + 1] = temp;
+        trocas ++;
     }
 
     printf("\nContas ordenadas por saldo:\n");
@@ -129,6 +132,7 @@ void insertionSort(int numContas, FILE *arquivo)
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
     printf("\n----------------------------\n");
+    system("pause");
 
 }
 
@@ -210,11 +214,9 @@ int main() {
                     insertionSort(numContas, abrirArqv);
                     fclose(abrirArqv);
                 }
-
                 break;
 
-            case 5:
-                
+            case 5:                
                 printf("\n   Programa encerrado.");
                 opcao = 5;
                 break;
