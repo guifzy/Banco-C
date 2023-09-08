@@ -7,3 +7,6 @@ Fulano de Tal
 William Malvezzi
 67890
 154998.23
+Guilherme Fernandes
+87722
+2030.56
