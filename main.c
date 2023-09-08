@@ -11,7 +11,7 @@ typedef struct banco {
 void cadastro(banco contas[], int maxContas, int *numContas, FILE *arquivo) {
     banco novaConta;
 
-    printf("\nDigite o numero da conta (max 5 numeros): ");
+    printf("\nDigite o numero da conta(max 5 numeros): ");
     scanf("%d", &novaConta.num);
     getchar();
 
