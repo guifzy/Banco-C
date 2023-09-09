@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct banco {
     char nome[50];
@@ -15,7 +16,7 @@ void selectionSort(banco contas[], int numContas)
     int trocas = 0;
     int  min, i, j;
 
-
+    clock_t tempInicial = clock();
     for (i = 0; i < numContas; i++)
     {
         min = i;
@@ -35,6 +36,9 @@ void selectionSort(banco contas[], int numContas)
             trocas ++;
         }
     }
+    clock_t tempFinal = clock();
+    
+    double tempoGasto = ((double)(tempFinal - tempInicial)) / CLOCKS_PER_SEC;
 
     printf("\nContas ordenadas por saldo:\n");
     for (int i = 0; i < numContas; i++) {
@@ -46,6 +50,7 @@ void selectionSort(banco contas[], int numContas)
     }
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
+    printf("\nOrdenacao feita em %f segundos", tempoGasto);
     printf("\n----------------------------\n");
     system("pause");
 }
@@ -57,6 +62,7 @@ void insertionSort(banco contas[], int numContas)
     int trocas = 0;
     int  min, i, j;
 
+    clock_t tempInicial = clock();
     for (i = 1; i < numContas; i++) {
         temp = contas[i];
         j = i - 1;
@@ -70,6 +76,9 @@ void insertionSort(banco contas[], int numContas)
         }
         contas[j + 1] = temp;
     }
+    clock_t tempFinal = clock();
+    
+    double tempoGasto = ((double)(tempFinal - tempInicial)) / CLOCKS_PER_SEC;
 
     printf("\nContas ordenadas por saldo:\n");
     for (int i = 0; i < numContas; i++) {
@@ -81,6 +90,7 @@ void insertionSort(banco contas[], int numContas)
     }
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
+    printf("\nOrdenacao feita em %f segundos", tempoGasto);
     printf("\n----------------------------\n");
     system("pause");
 
