@@ -97,7 +97,7 @@ void selectionSort(int numContas, FILE *arquivo)
     }
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
-    printf("\nOrdenacao feita em %.6f segundos", tempoGasto);
+    printf("\nOrdenacao feita em %f segundos", tempoGasto);
     printf("\n----------------------------\n");
     system("pause");
 
@@ -126,7 +126,6 @@ void insertionSort(int numContas, FILE *arquivo)
             comps ++;
         }
         contas[j + 1] = temp;
-        trocas ++;
     }
 
     clock_t tempFinal = clock();
@@ -143,7 +142,7 @@ void insertionSort(int numContas, FILE *arquivo)
     }
     printf("\nNumero de comparacoes: %d", comps);
     printf("\nNumero de trocas: %d", trocas);
-    printf("\nOrdenacao feita em %.6f segundos", tempoGasto);
+    printf("\nOrdenacao feita em %f segundos", tempoGasto);
     printf("\n----------------------------\n");
     system("pause");
 
