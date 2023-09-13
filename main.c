@@ -9,7 +9,7 @@ typedef struct banco {
     float saldo;
 } banco;
 
-void cadastro(banco contas[], int maxContas, int *numContas, FILE *arquivo) {
+void cadastro(banco contas[], int *numContas, FILE *arquivo) {
     banco novaConta;
 
     printf("\nDigite o numero da conta(max 5 numeros): ");
@@ -149,7 +149,7 @@ void insertionSort(int numContas, FILE *arquivo)
 }
 
 int main() {   
-    int maxContas;
+    banco contas[100];
     int numContas = 0;
     int opcao;
     FILE *dadosBanco;
@@ -164,9 +164,8 @@ int main() {
     printf("\n|-----------------------------|");
     printf("\n|     BEM VINDO AO BANCO!     |");
     printf("\n|-----------------------------|\n");
-    printf("\nDigite o maximo de contas que serao cadastradas: ");
-    scanf("%d", &maxContas);
-    banco *contas = (banco *)malloc(maxContas * sizeof(banco));
+    
+    
 
     if (contas == NULL) {
         printf("Erro ao alocar memoria.\n");
@@ -185,13 +184,13 @@ int main() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1:               
-                if (numContas >= maxContas )
+            case 1:              
+                if (numContas >= 100 )
                 {
                     printf("\n   Maximo de contas atingidas!");                    
                 }else
                 {
-                    cadastro(contas, maxContas, &numContas, dadosBanco);
+                    cadastro(contas, &numContas, dadosBanco);
                 }
                 break;
 
@@ -241,7 +240,7 @@ int main() {
         }
     } while (opcao != 5);
 
-    free(contas);
+   
 
     return 0;
 }
